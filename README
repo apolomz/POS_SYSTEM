@@ -10,3 +10,17 @@ source venv/bin/activate  # En Windows: venv\Scripts\activate
 -python app/main.py
 
 Conexión exitosa a PostgreSQL
+
+
+
+##COmo hacer que funcione??
+
+##Iniciar venv afuera del app: 
+
+  .\venv\Scripts\activate
+
+## Luego entrar cd a pos_system y ahí si inicilizar:
+
+  python app/api.py
+
+## Entrar al react
