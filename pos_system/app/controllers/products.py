@@ -4,7 +4,7 @@ def listar_productos():
     conn = get_connection()
     cur = conn.cursor()
     cur.execute("SELECT id, name, price, stock FROM products")
-    rows = cur.fetchall
+    rows = cur.fetchall()
     print("Productos disponibles:")
     for row in rows:
         print(f"ID: {row[0]}, Nombre: {row[1]}, Precio: {row[2]}, Stock: {row[3]}")
