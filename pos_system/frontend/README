@@ -1,0 +1,9 @@
+##Creacion del frontend
+
+npm create vite@latest pos-frontend -- --template react
+
+## Iniciar el front
+
+cd pos-frontend
+npm install
+npm run dev
