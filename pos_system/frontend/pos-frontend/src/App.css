@@ -5,8 +5,14 @@ body {
   margin: 0;
 }
 
-h1 {
+h1,h2 {
   color: #2C3E50 ;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+p {
+  color: #2C3E50;
   text-align: center;
   margin-bottom: 2rem;
 }
