@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom'
+import LogoutButton from './LogoutBotton';
+
+const rol = localStorage.getItem('rol')
 
 function Navbar() {
     return (
@@ -7,6 +10,7 @@ function Navbar() {
       <Link to="/productos">Productos</Link>
       <Link to="/agregar-producto" style={{ marginLeft: '1rem' }}>Agregar Producto</Link>
       <Link to="/Lista" style={{ marginLeft: '1rem'}}>Lista de ventas</Link>
+      <LogoutButton />
     </nav>
     )
 }

@@ -28,4 +28,6 @@ Conexión exitosa a PostgreSQL
 npm start
 npm run dev
 
-## Verás tu frontend corriendo en http://localhost:5173
+## frontend corriendo en http://localhost:5173
+## Se instala para links:
+npm install react-router-dom

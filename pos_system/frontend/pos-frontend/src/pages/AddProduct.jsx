@@ -1,6 +1,16 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function AddProduct() {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem('user')) {
+      navigate('/login');
+    }
+  }, []);
+  
   const [form, setForm] = useState({
     name: '',
     description: '',
