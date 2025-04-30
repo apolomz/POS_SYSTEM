@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 function ProductList() {
   const [productos, setProductos] = useState([]);
   const [editingId, setEditingId] = useState(null);
-  const [form, setForm] = useState({ name: '', price: '' });
+  const [form, setForm] = useState({ name: '', price: '', stock: '' });
 
   const fetchProducts = () => {
     fetch('http://localhost:5000/api/products')
@@ -23,7 +23,7 @@ function ProductList() {
 
   const handleEdit = (product) => {
     setEditingId(product.id);
-    setForm({ name: product.name, price: product.price });
+    setForm({ name: product.name, price: product.price, stock: product.stock });  // Aseguramos que también cargue el stock
   };
 
   const handleSave = (id) => {
@@ -64,6 +64,14 @@ function ProductList() {
                   placeholder="Precio"
                   style={{ marginRight: '10px' }}
                 />
+                <input
+                  name="stock"
+                  type="number"
+                  value={form.stock}
+                  onChange={handleChange}
+                  placeholder="Stock"
+                  style={{ marginRight: '10px' }}
+                />
                 <button onClick={() => handleSave(p.id)} style={{ marginRight: '5px' }}>
                   Guardar
                 </button>
@@ -73,7 +81,7 @@ function ProductList() {
               </>
             ) : (
               <>
-                <strong>{p.name}</strong> - ${p.price}
+                <strong>{p.name}</strong> - ${p.price} - Stock: {p.stock}  {/* Mostrar el stock */}
                 <div style={{ marginTop: '0.5rem' }}>
                   <button onClick={() => handleEdit(p)} style={{ marginRight: '5px' }}>
                     Editar
