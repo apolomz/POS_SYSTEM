@@ -1,20 +1,19 @@
-import './App.css'
-import ProductList from './components/productList';
-import AddProduct from './components/addProduct';
-import SalesForm from './components/SalesFrom';
-import SalesList from './components/SaleList';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import ProductList from './pages/ProductList';
 
 function App() {
   return (
-    <div>
-      <h1>Sistema POS - React + Flask + PostgreSQL</h1>
-      <p>Bienvenido al sistema de facturación</p>
-      <SalesForm />
-      <ProductList />
-      <AddProduct />
-      <SalesList />
-    </div>
+    <Router>
+      <Navbar />
+      <div style={{ padding: '1rem' }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/productos" element={<ProductList />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
