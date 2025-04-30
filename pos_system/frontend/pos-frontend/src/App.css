@@ -51,6 +51,7 @@ form button:hover {
 }
 
 ul {
+  color: #2C3E50;
   list-style: none;
   padding: 0;
   max-width: 600px;

@@ -22,7 +22,7 @@ def get_products():
 
 @app.route('/api/products', methods=['POST'])
 def add_product():
-    data = request.get_json()
+    data = request.json
     conn = get_connection()
     cur = conn.cursor()
     cur.execute(
@@ -34,61 +34,29 @@ def add_product():
     conn.close()
     return jsonify({'message': 'Producto creado'}), 201
 
-@app.route('/api/sales', methods=['POST'])
-def add_sale():
-    data = request.get_json()
-    product_id = data['product_id']
-    quantity = int(data['quantity'])
-
-    conn = get_connection()
-    # Obtener precio unitario del producto
-    cur = conn.cursor()
-    cur.execute("SELECT price FROM products WHERE id = %s", (product_id,))
-    result = cur.fetchone()
-
-    if result:
-        price = result[0]
-        total = price * quantity
-
-        cur.execute("INSERT INTO sales (product_id, quantity, total) VALUES (%s, %s, %s)",
-                    (product_id, quantity, total))
-        conn.commit()
-        cur.close()
-        conn.close()
-        return jsonify({"message": "Venta registrada con éxito"}), 201
-    else:
-        cur.close()
-        conn.close()
-        return jsonify({"error": "Producto no encontrado"}), 404
-
-
-@app.route('/api/sales', methods=['GET'])
-def get_sales():
+@app.route('/api/products/<int:id>', methods=['DELETE'])
+def delete_product(id):
     conn = get_connection()
     cur = conn.cursor()
-    cur.execute("""
-        SELECT sales.id, products.name, sales.quantity, sales.total, sales.sale_date
-        FROM sales
-        JOIN products ON sales.product_id = products.id
-        ORDER BY sales.sale_date DESC
-    """)
-    rows = cur.fetchall()
+    cur.execute("DELETE FROM products WHERE id = %s", (id,))
+    conn.commit()
     cur.close()
-    conn.close()
+    return jsonify({'message': 'Producto eliminado'}), 200
 
-    sales = []
-    for row in rows:
-        sales.append({
-            "id": row[0],
-            "product_name": row[1],
-            "quantity": row[2],
-            "total": float(row[3]),
-            "sale_date": row[4].strftime("%Y-%m-%d %H:%M")
-        })
+@app.route('/api/products/<int:id>', methods=['PUT'])
+def update_product(id):
+    data = request.get_json()
+    name = data['name']
+    price = data['price']
+    
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("UPDATE products SET name = %s, price = %s WHERE id = %s",
+                (name, price, id))
+    conn.commit()
+    cur.close()
+    return jsonify({'message': 'Producto actualizado'}), 200
 
-    return jsonify(sales)
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
