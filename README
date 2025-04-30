@@ -24,3 +24,8 @@ Conexión exitosa a PostgreSQL
   python app/api.py
 
 ## Entrar al react
+## Entrar donde esta el react y darle: está en: pos-frontend
+npm start
+npm run dev
+
+## Verás tu frontend corriendo en http://localhost:5173
